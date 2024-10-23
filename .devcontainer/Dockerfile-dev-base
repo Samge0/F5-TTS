@@ -1,0 +1,16 @@
+# set base mirror
+FROM samge/ai-env:cuda11.8.0-cudnn8-devel-ubuntu22.04-python3.10.13-torch2.2.0 as base
+
+# 设置工作目录
+WORKDIR /home
+
+ARG PROXY
+ENV http_proxy=${PROXY} https_proxy=${PROXY}
+
+COPY requirements.txt requirements.txt
+
+# use known version number
+RUN pip install -r requirements.txt
+
+# 重置代理配置
+ENV http_proxy= https_proxy=
