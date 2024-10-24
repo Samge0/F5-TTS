@@ -12,8 +12,8 @@ ARG PROXY
 ENV http_proxy=${PROXY} https_proxy=${PROXY}
 
 # 配置启动时执行的脚本，用于设置别名等环境配置
-RUN echo "alias pxyon='export https_proxy=${PROXY} http_proxy=${PROXY}'" >> /root/.bashrc && \
-    echo "alias pxyoff='unset https_proxy http_proxy'" >> /root/.bashrc && \
+RUN echo "alias pxyon='export https_proxy=${PROXY} http_proxy=${PROXY}' no_proxy='localhost,127.0.0.1,::1,192.168.*'" >> /root/.bashrc && \
+    echo "alias pxyoff='unset https_proxy http_proxy' no_proxy='localhost,127.0.0.1,::1,192.168.*'" >> /root/.bashrc && \
     echo "alias giton='git config --global http.proxy \"${PROXY}\" && git config --global https.proxy \"${PROXY}\"'" >> /root/.bashrc && \
     echo "alias gitoff='git config --global --unset http.proxy && git config --global --unset https.proxy'" >> /root/.bashrc
 
